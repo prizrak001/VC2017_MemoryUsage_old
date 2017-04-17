@@ -4,6 +4,8 @@
 #include <memory>
 #include <stdio.h>
 
+#include <MemoryPool.h>
+
 // 
 // http://stackoverflow.com/a/12529302/2314910
 // 
@@ -72,6 +74,14 @@ int main() {
         fillList();
         clearList();
     }
+
+    MemoryPool<size_t> pool;
+    size_t* x = pool.allocate();
+
+    *x = 0xDEADBEEF;
+    std::cout << std::hex << *x << std::endl;
+
+    pool.deallocate(x);
 
     return EXIT_SUCCESS;
 }
